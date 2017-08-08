@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link lang="de">
+    <title>Kupecheskiy dom</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">-->
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js'></script>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script type="text/javascript" src="./js/main.js"></script>
+    <script id="shopProducts" type="text/x-handlebars-template">
+        <div class="item" id="{{name}}">
+            <img class="img_products" src='{{img}}' alt="">
+            <p class="nameProd">{{name}}</p>
+            <p class="price">{{price}} <span class="currency">₽</span></p>
+            <input  class="inp_prod but" value="Подробнее" type="submit">
+            <input class="inp_prod but in" type="button" value="В корзине" hidden>
+        </div>
+        <!--<p class="description">{{text}}</p>-->
+    </script>
+    <script id="shopBasket" type="text/x-handlebars-template">
+        <div id="{{name}}Clone" class="clone">
+            <img class="img_products" src='{{img}}' alt="">
+            <div>
+                <p class="price ">{{price}}</p>
+                <p class="currency"></p>
+            </div>
+            <p class="mul">x</p>
+            <input class="inp_prod qty" type="text" min="1" max="999"  value="1">
+            <input class="but two del"  type="button" value="Удалить">
+            <p>{{name}}</p>
+        </div>
+    </script>
+    <script id="basketItem" type="text/x-handlebars-template">
+        <div class="product_page">
+            <div class="header_pp">
+                <p>Страница товара</p><span class="close">Закрыть</span>
+            </div>
+            <div class="main_pp">
+                <div class="text_pp">{{text}}</div>
+                <div class="info_pp">
+                    <img src="{{img}}">
+                    <p>{{price}} ₽</p>
+                    <input type="button" value="В корзину" class="but in">
+                    <i hidden>Товар в корзине:</i></br>
+                    <input class="but two" type="button" value="Удалить" hidden>
+                    <span hidden>{{name}}</span>
+                </div>
+            </div>
+        </div>
+    </script>
+    <!--<script id="shopProducts" type="text/x-handlebars-template">-->
+        <!--<div>-->
+            <!--<img class="img_products" src='{{img}}' alt="">-->
+            <!--<p>{{price}}<span class="currency">{{currency}}</span></p>-->
+            <!--<input  class="inp_prod but" value="добавить" type="submit">-->
+            <!--<p class = 'hh'>Описание товара<p class="description">{{text}}</p></p>-->
+        <!--</div>-->
+    <!--</script>-->
+    <!--<script id="shopBasket" type="text/x-handlebars-template">-->
+        <!--<div>-->
+            <!--<img class="img_products" src='{{img}}' alt="">-->
+            <!--<p>{{price}}</p><span class="currency">{{currency}}</span>-->
+            <!--<input class="inp_prod qty" type="number" min="1" max="999"  value="1">-->
+            <!--<input class="del" type="button" value="del">-->
+            <!--<p>{{name}}</p>-->
+        <!--</div>-->
+    <!--</script>-->
+</head>
+<body>
+    <section class="header">
+        <img class="logo" src="img/logo.jpg">
+        <ul class="menu_header">
+            <li><a ref="product" class="scrollLinkhead">ПРОДУКЦИЯ</a></li>
+            <li><a ref="clients" class="scrollLinkhead" >ПАРТНЕРЫ И КЛИЕНТЫ</a></li>
+            <li><a ref="markOfProd" class="scrollLinkhead">ТОРГОВЫЕ МАРКИ</a></li>
+            <li><a ref="about" class="scrollLinkhead">О НАС</a></li>
+            <li><a ref='contacts' class="scrollLinkhead">КОНТАКТЫ</a></li>
+        </ul>
+    </section>
+    <div class="under_header" id="under_header">
+    </div>
+    <div class="wrap"></div>
+    <main class="pr" id="product">
+        <aside id="aside1" class="nav">
+            <p class="prodwrapper">Продукция</p>
+            <div class="slide">
+                <span>Категории</span>
+                <p class="here" id="here">Все товары</p>
+                <ul class="show" id="navigation">
+                    <li class="change_category">Все товары</li>
+                    <li class="change_category">Тонометры</li>
+                    <li class="change_category">Небулайзеры</li>
+                    <li class="change_category">Ляпко</li>
+                    <li class="change_category">Стетоскопы</li>
+                    <li class="change_category">Другие товары</li>
+                </ul>
+                <p class="pForLine">Цена</p>
+                <input class="priceNav" type="text" placeholder="от...">
+                <input class="priceNav" type="text" placeholder="до...">
+                <div class="infoBasket">
+                    <p>Корзина</p>
+                    <p id="descBask"></p>
+                    <p class="count" id="count">Пусто</p>
+                    <input id="buy" class="but bas" type="button" value="Оформить" hidden>
+                </div>
+                <div id="mobileBasket"><img src="../img/basket.png"><p id='mobileBask'>(0)</p></div>
+            </div>
+        </aside>
+        <div id="under_head2"></div>
+        <article id="products">
+        </article>
+    </main>
+    <p class="topic_wrapper" id="clients">ПАРТНЕРЫ И КЛИЕНТЫ</p>
+    <section class="partners">
+        <div class="part_wrapper">
+            <div><img src="./img/arnika.jpg"></div>
+            <div><img src="./img/vashaApteka.jpg"></div>
+            <div><img src="./img/krest.jpg"></div>
+            <div><img src="./img/krest2.jpg"></div>
+            <div><img src="./img/zdrr.jpg"></div>
+            <div><img src="./img/mc.jpg"></div>
+            <div><img src="./img/olvia.jpg"></div>
+            <div><img src="./img/heart.jpg"></div>
+            <div><img src="./img/sarepta.jpg"></div>
+            <div><img src="./img/centralna.jpg"></div>
+        </div>
+    </section>
+    <p class="topic_wrapper marks" id="markOfProd">ТОРГОВЫЕ МАРКИ</p>
+        <section class="trade_marks">
+            <div class="countries"><img src="./img/engl.jpg"><img src="./img/swiss.jpg"><img src="./img/rus.jpg"></div>
+    <p class="aboutProd">B.Well – европейская компания, создающая медицинские приборы и товары для здоровья всей семьи. Компания B.Well была основана группой британских докторов в 2004 году в Лондоне. Всего за несколько лет медицинские приборы B.Well завоевали доверие многих английских семей, и сегодня бренд является одним из самых конкурентоспособных в Европе. В 2011 году компания перенесла головной офис в Швейцарию, чтобы обеспечить эффективное управление качеством, развитие бренда, коммуникацию с дистрибьюторами, логистику и сервис. Центральное положение страны в Европе, наличие квалифицированных специалистов, имеющих большой опыт в создании точных приборов, возможность сотрудничества с лучшими врачами и медицинскими институтами в Европе определили выбор B.Well. Когда англичане говорят: «Ве well» - они желают здоровья, хорошего самочувствия и благополучия. Секрет успешного развития B.Well – тщательный выбор технологических решений в разработке и создании медицинской техники. Сочетание проверенных временем технологий и передовых уникальных разработок позволило специалистам компании реализовать свою главную цель – создавать приборы, сочетающие качество, надежность и доступность. Основным направлением производства для компании является медицинская техника для домашнего использования. В ассортименте B.Well есть приборы для каждого члена семьи – малышей, их родителей, бабушек и дедушек: тонометры, ингаляторы, термометры, ирригаторы, грелки, а также серия приборов для детей до 3 лет. Направление B.Well Kids также быстро завоевало доверие и популярность благодаря оптимальному сочетанию функциональности, качества и цены. С B.Well забота о здоровье станет хорошей традицией!</p>
+    <p class="aboutProd">Microlife - швейцарская компания,мировой лидер в разработке и производстве медицинского диагностического оборудования для использования в домашних и клинических условиях.</br>
+        В 1981 г. в Швейцарии компанией Microlife был создан и запатентован первый в мире электронный термометр</br>
+        Основной продукцией являются электронные и механические измерители артериального давления, стетоскопы, электронные термометры, небулайзеры.
+    </p>
+    </section>
+    <section class="about" id="about">
+        <p class="about_wrapper">О НАС</p>
+        <div class="textAbout"><p><span class="bold">ООО « Купеческий дом Донбасс»</span> - активно развивающаяся компания, занимается оптовыми поставками медицинской техники и оборудования по всей территории Донецкой области.</p>
+
+            <p>В их число входят: электронные и механические измерители артериального давления, стетоскопы, электронные термометры, небулайзеры, ортопедическая продукция (костыли, ходунки, трости) , медтекстиль и компрессионный трикотаж.</p>
+
+            <p>За 17 лет работы наша компания получила опыт продаж и удержания прочных позиций на рынке. В основе концепции развития нашего предприятия, лежат профессиональные качества сотрудников, крепкие связи с партнерами и внимание к новым идеям, мы дорожим каждым своим клиентом, поэтому всегда ориентируемся на долгосрочные отношения и отзывчиво относимся к встречным предложениям. Нам действительно важно, чтобы наши партнеры добивались успеха вместе с нами.</p>
+            <p class="tab bold">Наши основные преимущества:</p>
+            <ul>
+                <li>100 % покрытие рынка продаж;</li>
+                <li>многолетний опыт работы;</li>
+                <li>сплоченная профессиональная команда;</li>
+                <li>наличие собственного сервисного центра </li>
+                <li>ежегодное участие в профильных выставках</li>
+                <li>проведение и участие в благотворительных акциях</li>
+                <li>постоянное обновление ассортимента</li>
+                <li>возможность поставки товаров по спецзаказу</li>
+                <li>система скидок для крупных клиентов</li>
+            </ul>
+            <p>Мы убеждены, что бизнес должен строиться на взаимоуважении, честности и прозрачности намерений. Открыто обсуждая условия сотрудничества, мы находим решения, от которых выигрывают обе стороны. Именно к такому взаимодействию мы стремимся сами и приглашаем своих партнеров и клиентов.</p>
+
+            <p>У нас есть работоспособная, профессиональная команда, которую мы сохранили и которая не прекращала свою деятельность в период военных действий. Наши сотрудники на постоянной основе проводят  презентации и обучение персонала торговых точек.</p>
+
+            <p>Мы обладаем полной рабочей базой  по всей Донецкой области, заключены эксклюзивные договора, имеем долгосрочные связи и дружеские отношения со всеми крупно - сетевыми контрагентами. В перспективе мы имеем устные договоренности с руководителями ряда крупных сетевых аптек, об эксклюзивном сотрудничестве.</p>
+
+            <p>Наше предприятие имеет достаточные финансовые и физические ресурсы для дальнейшего успешного  развития в продвижении Вашей торговой марки на нашей территории.</br>
+                Исходя из выше изложенного, наша компания надеется на взаимовыгодное, долгосрочное сотрудничество.</p>
+        </div>
+    </section>
+    <p class="topic_wrapper cont">КОНТАКТЫ</p>
+    <section class="contacts" id="contacts">
+        <div class ='infoOfFounder'>
+            <div class="names">
+                <p>
+                    Бугаев Владимир Сергеевич</br>
+                    <span class="ph">+38(050)949-15-02</span></br>
+                        <span class="mail">bugaev.kdd@mail.ru</span>
+                </p>
+                <p>
+                    Антонов Сергей Михайлович</br>
+                    <span class="ph">+380(050)473-08-05</span></br>
+                        <span class="mail">sergey.antonov-kdd@mail.ru</span>
+                </p>
+            </div>
+            <div class="adress">
+                <p>
+                    Адрес:</br>
+                    г.Донецк, проспект Ильича 44</p>
+                <p class="time">
+                    <span>Время работы: c 9.00 до 17:00</span></br>
+                    Выходные: суббота,воскресенье.
+                </p>
+            </div>
+        </div>
+        <form method="post" action="buy.php" class="formForConnecting">
+            <p>Cвязаться с нами</p>
+            <input name="name" type="text" placeholder="*Имя" required>
+            <input name="email"type="email" placeholder="*Почта" required>
+            <input name="phone" type="tel" placeholder="*Телефон" required>
+            <textarea name="someText" class="inpTextarea" placeholder="Коментарий к заказу..."></textarea>
+            <input type="submit" class="sub" name="">
+        </form>
+    </section>
+    <div id='modalPage' hidden>
+    </div>
+    <div id="modalBasket" hidden>
+        <section id="basket">
+            <div class="header_pp">
+                <p>Оформление заказа</p><span id="closeBasket" class="close">Скрыть</span>
+            </div>
+            <div id="pro"></div>
+            <div class="info_basket">
+                <div id="all_sum" >Общая сумма </br><span class="allMoney"></span></div>
+                <form method="post" action="buy.php" id="forma">
+                    <input name="name" type="text" placeholder="*Имя" required>
+                    <input name="email"type="email" placeholder="*Почта" required>
+                    <input name="phone" type="tel" placeholder="*Телефон" required>
+                    <textarea name="someText" class="inpTextarea" placeholder="Коментарий к заказу..."></textarea>
+                    <input type="hidden" id="hiddenList" name="products">
+                    <input  id="send" type="submit" value="Отправить">
+                </form>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
